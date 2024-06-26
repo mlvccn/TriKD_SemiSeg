@@ -1,0 +1,42 @@
+# arguments for dataset
+dataset: cityscapes
+nclass: 19
+crop_size: 512
+data_root: /data/datasets/Cityscapes
+
+# arguments for training
+epochs: 300
+batch_size: 2 # per GPU x 4 GPUs
+lr: 0.005
+lr_multi: 1.0
+criterion:
+  name: OHEM
+  kwargs:
+    ignore_index: 255
+    thresh: 0.7
+    min_kept: 200000
+
+cps_weight: 0.1
+
+criterion_low:
+  type: L2
+  weight: 0.5
+
+criterion_high:
+  weight: 0.5
+
+# arguments for model
+net: # Required.
+  num_classes: 19
+  ema_decay: 0.99
+  encoder_tiny:
+    type: tinyvit
+    params: 21
+    weight: 1.0
+  encoder_cnn:
+    type: resnet101
+    weight: 1.0
+  encoder_vit:
+    type: deit_base
+    weight: 1.0
+

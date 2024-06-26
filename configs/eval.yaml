@@ -1,0 +1,61 @@
+# arguments for dataset
+# dataset: cityscapes
+# nclass: 19
+# crop_size: 512
+# data_root: /data/datasets/Cityscapes
+dataset: # Required.
+  type: cityscapes_semi
+  train:
+    data_root: ../../../../data/cityscapes
+    data_list: ../../../../data/splits/cityscapes/1488/labeled.txt
+    flip: True
+    GaussianBlur: False
+    rand_resize: [0.5, 2.0]
+    #rand_rotation: [-10.0, 10.0]
+    crop:
+      type: rand
+      size: [512, 512] # crop image with HxW size
+  val:
+    data_root: /data/datasets/Cityscapes
+    data_list: /home/cjj/Documents/UniMatch/splits/cityscapes/eval.txt
+    crop:
+      type: center
+      size: [512, 512] # crop image with HxW size
+  batch_size: 2 # limit to 3
+  n_sup: 1488
+  noise_std: 0.1
+  workers: 4
+  mean: [123.675, 116.28, 103.53]
+  std: [58.395, 57.12, 57.375]
+  ignore_label: 255
+# arguments for training
+epochs: 300
+batch_size: 4 # per GPU x 4 GPUs
+lr: 0.005
+lr_multi: 1.0
+criterion:
+  name: OHEM
+  kwargs:
+    ignore_index: 255
+    thresh: 0.7
+    min_kept: 200000
+conf_thresh: 0
+
+cps_weight: 0.1
+
+criterion_low:
+  type: L2
+  weight: 0.5
+
+# arguments for model
+net: # Required.
+  num_classes: 19
+  ema_decay: 0.99
+  encoder_tiny:
+    type: tinyvit
+    params: 21
+    weight: 1.0
+  encoder_cnn:
+    type: resnet101
+    weight: 0.5
+
