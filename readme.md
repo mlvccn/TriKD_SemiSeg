@@ -190,12 +190,12 @@ bash scripts/eval.sh
 If you find this repo useful, please cite the following paper.
 
 ```
-@article{li-TriKD,  
-  title        = {Triple-view knowledge distillation for semi-supervised semantic segmentation},
-  author       = {Ping Li, Junjie Chen, Li Yuan, Xianghua Xu, Mingli Song},
-  journal      = {arXiv},
-  year         = {2023},
-  doi          = {https://doi.org/10.48550/arXiv.2309.12557},
+@article{li-tmm2025-trikd,
+	title        = {Triple-view knowledge distillation for semi-supervised semantic segmentation},
+	author       = {Ping Li and Junjie Chen and Li Yuan and Xianghua Xu and Mingli Song},
+	journal      = {IEEE Transactions on Multimedia (TMM)},
+	year         = {2025},
+	doi          = {10.1109/TMM.2025.3639923}
 }
 ```
 
